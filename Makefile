@@ -48,7 +48,7 @@ INCDIRS := -Iinclude
 # add the libraries 
 # SDL2 = -lmingw32 -lSDL2main -lSDL2
 # or  -LC:\lib\SDL2\lib\ -lmingw32 -lSDL2main -lSDL2
-LIBS    :=
+LIBS    := -lncurses
 
 ifeq ($(UNAME),Linux)
 	OS := linux
@@ -80,10 +80,10 @@ endif
 # and add to the path "C:\msys64\usr\bin  (this is the defauld path)" 
 # and rename the executable find.exe of msys to findg.exe to avoid problems with the Windows find command
 # also rename this MACROS
-ALLCPPS    := $(shell find src/ -type f  -iname *.cpp)
-ALLCS      := $(shell find src/ -type f  -iname *.c)
+ALLCPPS    := $(shell findg src/ -type f  -iname *.cpp)
+ALLCS      := $(shell findg src/ -type f  -iname *.c)
 ALLOBJ     := $(foreach F,$(ALLCPPS) $(ALLCS),$(call C2O,$(F)))
-SUBDIRS    := $(shell find $(SRC) -type d)
+SUBDIRS    := $(shell findg $(SRC) -type d)
 OBJSUBDIRS := $(patsubst $(SRC)%,$(OBJ)%,$(SUBDIRS))
 
 .PHONY: info
